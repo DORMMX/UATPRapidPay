@@ -1,4 +1,5 @@
 using DBRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
@@ -6,6 +7,7 @@ namespace UATPRapidPay.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = "BasicAuthentication")]
     public class PayController : ControllerBase
     {
         readonly ITransactionRepositoy _transactionRepositoy;
@@ -17,10 +19,9 @@ namespace UATPRapidPay.Controllers
 
         [HttpPost]        
         public ActionResult<Transaction> Post(Transaction transaction)
-        {
-            if (_transactionRepositoy.CreateTransaction(transaction))
-                return Ok(transaction);
-            return BadRequest();
+        {            
+            return Ok(_transactionRepositoy.CreateTransaction(transaction));
+            
         }
     }
 }

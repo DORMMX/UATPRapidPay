@@ -1,4 +1,5 @@
 using DBRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
@@ -6,6 +7,7 @@ namespace UATPRapidPay.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = "BasicAuthentication")]
     public class CardController : ControllerBase
     {
         readonly ICardRepository _cardRepository;
