@@ -35,3 +35,43 @@ Time for solution:
 5 Hours
 How to submit solution:
 Provide a downloadable link of the solution
+
+
+Request sample:
+User: peter
+Pwd: peter123
+
+Get Cards
+curl --location --request GET 'http://localhost:5005/Card' \
+--header 'Authorization: Basic cGV0ZXI6cGV0ZXIxMjM='
+
+Create new Card
+curl --location --request POST 'http://localhost:5005/card' \
+--header 'Authorization: Basic cGV0ZXI6cGV0ZXIxMjM=' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "cardNumber": "123456789012346",  
+    "userName" : "David Romo",
+    "ExpirationMonthDate" :  6,
+    "ExpirationYearDate" : 23
+}'
+
+Create payment
+curl --location --request POST 'http://localhost:5005/Pay' \
+--header 'Authorization: Basic cGV0ZXI6cGV0ZXIxMjM=' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "card" : 
+    {
+        "id": 1,
+        "cardNumber": "123456789012346",  
+        "userName" : "David Romo",
+        "ExpirationMonthDate" :  1,
+        "ExpirationYearDate" : 23
+    },
+    "amount": 100
+}'
+
+Get Balance
+curl --location --request GET 'http://localhost:5005/Balance?cardNumber=123456789012346' \
+--header 'Authorization: Basic cGV0ZXI6cGV0ZXIxMjM='
