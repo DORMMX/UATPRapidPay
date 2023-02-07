@@ -41,24 +41,33 @@ Request sample:
 User: peter
 Pwd: peter123
 
+Get JWT
+curl --location --request POST 'http://localhost:5005/Identity/authentication' \
+--header 'Authorization: Basic cGV0ZXI6cGV0ZXIxMjM=' \
+--header 'Content-Type: application/json' \
+--data-raw '{    
+    "User" : "peter",
+    "Password" :  "peter123"    
+}'
+
 Get Cards
 curl --location --request GET 'http://localhost:5005/Card' \
---header 'Authorization: Basic cGV0ZXI6cGV0ZXIxMjM='
+--header 'Authorization: Bearer SET_TOKEN'
 
 Create new Card
 curl --location --request POST 'http://localhost:5005/card' \
---header 'Authorization: Basic cGV0ZXI6cGV0ZXIxMjM=' \
+--header 'Authorization: Bearer SET_TOKEN' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "cardNumber": "123456789012346",  
     "userName" : "David Romo",
-    "ExpirationMonthDate" :  6,
+    "ExpirationMonthDate" :  1,
     "ExpirationYearDate" : 23
 }'
 
 Create payment
 curl --location --request POST 'http://localhost:5005/Pay' \
---header 'Authorization: Basic cGV0ZXI6cGV0ZXIxMjM=' \
+--header 'Authorization: Bearer SET_TOKEN' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "card" : 
@@ -69,9 +78,9 @@ curl --location --request POST 'http://localhost:5005/Pay' \
         "ExpirationMonthDate" :  1,
         "ExpirationYearDate" : 23
     },
-    "amount": 100
+    "amount": 200
 }'
 
 Get Balance
 curl --location --request GET 'http://localhost:5005/Balance?cardNumber=123456789012346' \
---header 'Authorization: Basic cGV0ZXI6cGV0ZXIxMjM='
+--header 'Authorization: Bearer SET_TOKEN'
