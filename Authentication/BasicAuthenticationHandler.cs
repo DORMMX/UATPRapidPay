@@ -29,7 +29,7 @@ namespace UATPRapidPay.Authentication
                 var token = authHeader.Substring("Basic ".Length).Trim();
                 var credentialstring = Encoding.UTF8.GetString(Convert.FromBase64String(token));
                 var credentials = credentialstring.Split(':');
-                if (_userRepository.Authenticate(credentials[0], credentials[1]))
+                if (_userRepository.Authenticate(credentials[0], credentials[1]).Result)
                 {
                     var claims = new[] { new Claim("name", credentials[0]), new Claim(ClaimTypes.Role, "Admin") };
                     var identity = new ClaimsIdentity(claims, "Basic");

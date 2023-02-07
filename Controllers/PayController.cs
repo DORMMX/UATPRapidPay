@@ -1,4 +1,5 @@
 using DBRepository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services;
@@ -7,7 +8,7 @@ namespace UATPRapidPay.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize(AuthenticationSchemes = "BasicAuthentication")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PayController : ControllerBase
     {
         readonly ITransactionRepositoy _transactionRepositoy;
